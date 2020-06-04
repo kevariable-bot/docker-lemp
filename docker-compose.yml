@@ -1,0 +1,45 @@
+version: "3"
+services:
+  # Container web
+  web:
+    # Docker Image Nginx
+    image: nginx:1.16-alpine
+    # port for running PHP in browser http://localhost:8010
+    ports:
+      - 8010:80
+    volumes:
+      # we project php index include nginx
+      - ./project:/var/www/html
+      # This is configuration nginx
+      - ./nginx/vhost.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php
+  # Container php
+  php:
+    # we change php:7.4-fpm-alpine to be php-custom:7.4-fpm-alpine
+    image: php-custom:7.4-fpm-alpine
+    # we project php index
+    volumes:
+      - ./project:/var/www/html
+    # this environment equate environment in mysql container
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: local
+      MYSQL_PASSWORD: secret 
+      MYSQL_DATABASE: mynewdb
+    depends_on:
+      - mysql
+  # Container mysql
+  mysql:
+    image: mariadb:10.4
+    command: --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    # port for acces mysql in docker exec -it [container mysql] bash
+    ports:
+      - 13306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: local
+      MYSQL_PASSWORD: secret 
+      MYSQL_DATABASE: mynewdb
