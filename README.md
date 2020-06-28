@@ -359,5 +359,3 @@ MariaDB [(none)]>
   and result like this
 
   ![result](pictures/the&#32;final&#32;result.png)
-
-  s
