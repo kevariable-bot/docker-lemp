@@ -97,7 +97,7 @@
 
   And then open your favorite Browser http://localhost:8010
 
-  ![phpinfo](pictures/php&#32;execute.png)
+  ![phpinfo](https://i.imgur.com/O0V87yx.png)
 
   We finished running PHP and Nginx, now what?
 
@@ -358,4 +358,4 @@ MariaDB [(none)]>
 
   and result like this
 
-  ![result](pictures/the&#32;final&#32;result.png)
+  ![result](https://i.imgur.com/N99OSTe.png)
